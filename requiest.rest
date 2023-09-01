@@ -1,0 +1,45 @@
+
+POST http://localhost:4000/api/users/
+Content-Type: application/json
+
+{
+    "firstName": "bethel",
+    "lastName": "meng",
+    "userName": "bethi",
+    "email": "bethel@gmail.com",
+    "password": "123454321"
+}
+
+###
+
+POST http://localhost:4000/api/users/
+Content-Type: application/json
+
+{
+    "firstName": "john",
+    "lastName": "david",
+    "userName": "jo",
+    "email": "johnd@gmail.com",
+    "password": "123488321"
+}
+
+###
+POST http://localhost:4000/api/users/login
+Content-Type: application/json
+
+
+{
+    "email": "johnd@gmail.com",
+    "password": "123488321"
+}
+
+
+###
+
+GET http://localhost:4000/api/users/
+Content-Type: application/json
+
+{
+ x-auth-token:
+"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkyODg3MDU5LCJleHAiOjE2OTI4OTA2NTl9pXZxXo6Ir1FrP169X7lTGV-hz313DUxhM4OLjGGEJXs"
+}
