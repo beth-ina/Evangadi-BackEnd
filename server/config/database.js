@@ -1,4 +1,4 @@
-const mysql = require("mysql");
+const mysql = require("mysql2");
 
 // const pool = mysql.createPool({
 //   host: process.env.HOST,
@@ -6,23 +6,16 @@ const mysql = require("mysql");
 //   database: process.env.DB,
 //   password: process.env.PASS,
 // });
-const pool = mysql.createPool({
-  host: "localhost",
-  user: "evangadiforum",
-  database: "evangadiforum",
-  password: "evangadiforum",
-});
 
-pool.getConnection(function (err, connection) {
-  console.log("database is connected");
-});
+const pool = mysql.createConnection(process.env.DATABASE_URL);
 
 let registration = `CREATE TABLE IF NOT EXISTS registration (
   user_id int AUTO_INCREMENT,
   user_name VARCHAR(255) NOT NULL,
   user_email VARCHAR(255) NOT NULL,
   user_password VARCHAR(255) NOT NULL,
-  PRIMARY KEY (user_id)
+  PRIMARY KEY (user_id),
+  UNIQUE KEY (user_name)
 );`;
 
 let profile = `CREATE TABLE IF NOT EXISTS profile (
@@ -30,8 +23,8 @@ let profile = `CREATE TABLE IF NOT EXISTS profile (
   user_id int NOT NULL,
   first_name VARCHAR(255) NOT NULL,
   last_name VARCHAR(255) NOT NULL,
-  PRIMARY KEY (user_profile_id),
-  FOREIGN KEY (user_id) REFERENCES registration (user_id)
+  PRIMARY KEY (user_profile_id)
+
 );`;
 
 let question = `CREATE TABLE IF NOT EXISTS question (
@@ -40,11 +33,9 @@ let question = `CREATE TABLE IF NOT EXISTS question (
   question_description VARCHAR(255),
   question_code_block VARCHAR(255),
   tags VARCHAR(255),
-  post_id VARCHAR(255) NOT NULL,
   user_id int NOT NULL,
-  PRIMARY KEY (question_id),
-  UNIQUE KEY (post_id),
-  FOREIGN KEY (user_id) REFERENCES registration (user_id)
+  PRIMARY KEY (question_id)
+
 );`;
 
 let answer = `CREATE TABLE IF NOT EXISTS answer (
@@ -53,9 +44,7 @@ let answer = `CREATE TABLE IF NOT EXISTS answer (
   answer_code_block VARCHAR(255),
   user_id int NOT NULL,
   question_id int NOT NULL,
-  PRIMARY KEY (answer_id),
-  FOREIGN KEY (user_id) REFERENCES registration (user_id),
-  FOREIGN KEY (question_id) REFERENCES question (question_id)
+  PRIMARY KEY (answer_id)
 );`;
 pool.query(registration, (err, results) => {
   if (err) throw err;

@@ -37,9 +37,4 @@ Content-Type: application/json
 ###
 
 GET http://localhost:4000/api/users/
-Content-Type: application/json
-
-{
- x-auth-token:
-"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNjkyODg3MDU5LCJleHAiOjE2OTI4OTA2NTl9pXZxXo6Ir1FrP169X7lTGV-hz313DUxhM4OLjGGEJXs"
-}
+ x-auth-token:eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ.eyJpZCI6MiwiaWF0IjoxNjkyODg3MDU5LCJleHAiOjE2OTI4OTA2NTl9pXZxXo6Ir1FrP169X7lTGV-hz313DUxhM4OLjGGEJXs"
